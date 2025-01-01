@@ -34,8 +34,8 @@ def generate_and_insert_orders():
             print("La base de données ne contient pas assez de clients, produits, modes de paiement ou villes.")
             return
 
-        # Générer 50 commandes
-        for _ in range(80):
+        # Générer 560 commandes
+        for _ in range(560):
             client_id = random.choice(client_ids)
             product_id, stock, price = random.choice(products)
 
