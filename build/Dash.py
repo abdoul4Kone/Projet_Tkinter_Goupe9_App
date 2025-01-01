@@ -322,10 +322,11 @@ def create_category_pie(df):
     )
 
 def create_payment_distribution(df):
-    payment_data = df.groupby('type_paiement')['montant'].sum()
+    payment_data = df.groupby('type_paiement')['montant'].sum().reset_index()
     return px.bar(
-        x=payment_data.index,
-        y=payment_data.values,
+        payment_data,
+        x='type_paiement',
+        y='montant',
         title='Distribution des modes de paiement'
     )
 
