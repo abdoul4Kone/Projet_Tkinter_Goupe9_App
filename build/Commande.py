@@ -3,11 +3,11 @@ import tkinter as tk
 from tkinter import messagebox
 import tkinter.messagebox
 import customtkinter 
-import ttkbootstrap as ttk
+# import ttkbootstrap as ttk
 import mysql.connector
 from pathlib import Path
 from PIL import Image
-from ttkbootstrap.tableview import Tableview
+# from ttkbootstrap.tableview import Tableview
 from session_manager import user_id
 import os
 import json
