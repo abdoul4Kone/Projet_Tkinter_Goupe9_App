@@ -12,6 +12,14 @@ from subprocess import call, Popen
 from session_manager import SessionManager
 import tkinter as tk
 import webbrowser
+from pathlib import Path
+
+OUTPUT_PATH = Path(__file__).parent
+ASSETS_PATH = OUTPUT_PATH / Path(r".\assets\images")
+
+
+def relative_to_assets(path: str) -> Path:
+    return ASSETS_PATH / Path(path)
 
 # Fonction pour ouvrir le lien
 def open_webpage():
@@ -42,14 +50,14 @@ class Login(tk.Tk):
         self.logFrame.pack(expand=True)
         
         # Chargement de l'image
-        image = Image.open(r".\assets\frame_01Ac\image_13.png")  # Remplacez par le chemin correct
+        image = Image.open(relative_to_assets("retour.png"))  # Remplacez par le chemin correct
         image = image.resize((20, 20))  # Redimensionner l'image
         self.img1 = ImageTk.PhotoImage(image)  # Garder une référence
 
 
         
         self.titre = ttk.Label(self.logFrame,text="Accès au tableau de bord! !",font=("Inter SemiBold", 13))
-        self.titre.grid(row=0,column=0, sticky="nsew", pady=10, padx=(50,10))
+        self.titre.grid(row=0,column=0, sticky="nsew", pady=10, padx=(35,10))
         
         # Champs et entrée
         
