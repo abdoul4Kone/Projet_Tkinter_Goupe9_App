@@ -64,7 +64,7 @@ class Login(tk.Tk):
         self.secFrame = ttk.Frame(self.logFrame)
         self.secFrame.grid(row=2, column=0, padx=10, sticky="nsew")
         
-        self.email = ttk.Label(self.secFrame, text="Email",font=("Inter SemiBold", 8))
+        self.email = ttk.Label(self.secFrame, text="Non utilisateur",font=("Inter SemiBold", 8))
         self.email.grid(row=0, column=0,padx=(10, 20), pady=(10, 5), sticky="w")
         
         self.entry_email = ttk.Entry(self.secFrame, bootstyle="info")
@@ -82,30 +82,12 @@ class Login(tk.Tk):
         self.button_login = ttk.Button(
             self.logFrame,
             text="Suivant",
-            bootstyle=SUCCESS,
+            bootstyle=INFO,
             command=self.verification
         )
         self.button_login.grid(row=3, column=0, pady=10, ipadx=30, ipady=5,padx=(0,10))
         
-        #Déjà inscrit?
         
-        self.inscription_frame = ttk.Frame(self.logFrame)
-        self.inscription_frame.grid(row=4, column=0, columnspan=2, pady=(10))
-        self.inscription_text = ttk.Label(
-            self.inscription_frame,
-            text="Pas encore inscrit ?",
-            font=("Inter", 8)
-        )
-        self.inscription_text.pack(side="left")
-        self.inscription_link = ttk.Button(
-            self.inscription_frame,
-            text="Inscrivez-vous?",
-            style="link.TButton",  # Style pour que ça ressemble à un lien
-            command=self.register,  # Ajouter la commande ici
-            cursor="hand2"
-        )
-        
-        self.inscription_link.pack(side="left")
         
         self.logFrame.grid_rowconfigure(0, weight=1)
         self.logFrame.grid_rowconfigure(1, weight=1)
