@@ -161,4 +161,8 @@ SET prix_livraison = CASE
 END;
 
 
+INSERT INTO Client (nom, prenoms, sexe,	date_naissance,	email,	mdp,	numero_tel) 
+VALUES
+('admin', 'admin', 'Masculin', '2023-09-05', 'admin', 'admin', '01010101');
+
 
