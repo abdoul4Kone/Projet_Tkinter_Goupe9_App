@@ -6,10 +6,10 @@ Ce projet est une application de bureau développée en Python avec Tkinter pour
 
 ## Fonctionnalités principales
 - **Authentification des utilisateurs** avec gestion des rôles.
-- **Catalogue des produits** avec options de recherche et de tri.
-- **Gestion des commandes** : ajout, modification, suppression.
+- **Catalogue des produits** avec options de navigation.
+- **Gestion des commandes** : ajout, modification, suppression dans le panier de produit.
 - **Mise à jour des stocks en temps réel**.
-- Interfaces graphiques conçues avec Figma et intégrées dans Tkinter.
+- La plupart des interfaces graphiques ont été conçues avec Figma et intégrées dans Tkinter.
 
 ## Prérequis
 Avant de commencer, assurez-vous d'avoir les éléments suivants installés :
@@ -19,7 +19,8 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés :
 - `pandas`
 - `numpy`
 - `matplotlib`
-
+- `dash`
+- `pymysql`
 ## Installation
 1. Clonez le dépôt :
    ```bash
