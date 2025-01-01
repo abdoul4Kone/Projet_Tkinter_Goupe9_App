@@ -9,7 +9,14 @@ import mysql.connector
 import pandas as pd
 from script import indicatifs,pays_indicatifs
 from subprocess import call
+from pathlib import Path
 
+OUTPUT_PATH = Path(__file__).parent
+ASSETS_PATH = OUTPUT_PATH / Path(r".\assets\images")
+
+
+def relative_to_assets(path: str) -> Path:
+    return ASSETS_PATH / Path(path)
 
 
 def Accueil():
@@ -98,7 +105,7 @@ class Register(tk.Tk):
 
     def setup_page2(self):
         # Chargement de l'image
-        image = Image.open(r".\assets\frame_01Ac\image_13.png")  # Remplacez par le chemin correct
+        image = Image.open(relative_to_assets("retour.png")")  # Remplacez par le chemin correct
         image = image.resize((20, 20))  # Redimensionner l'image
         self.img1 = ImageTk.PhotoImage(image)  # Garder une référence
 
@@ -172,7 +179,7 @@ class Register(tk.Tk):
 
     def setup_page3(self):
         # Chargement de l'image
-        image = Image.open(r".\assets\frame_01Ac\image_13.png")  # Remplacez par le chemin correct
+        image = Image.open(relative_to_assets("retour.png"))  # Remplacez par le chemin correct
         image = image.resize((20, 20))  # Redimensionner l'image
         self.img2 = ImageTk.PhotoImage(image)  # Garder une référence
 
