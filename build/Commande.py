@@ -775,7 +775,7 @@ class Commander(customtkinter.CTk):
             else:
                 self.status = False
         else:
-            self.status = False  # Si le mode sélectionné n'est pas 2
+            self.status = True  # Si le mode sélectionné n'est pas 2
 
     def validCarte(self):
         if self.selected_mode == 1:
@@ -786,7 +786,7 @@ class Commander(customtkinter.CTk):
             else:
                 self.status = False
         else:
-            self.status = False  # Si le mode sélectionné n'est pas 1
+            self.status = True  # Si le mode sélectionné n'est pas 1
 
     def valider(self):
         # Appel des méthodes de validation
