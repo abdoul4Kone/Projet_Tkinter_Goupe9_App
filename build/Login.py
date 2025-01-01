@@ -14,8 +14,6 @@ from pathlib import Path
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r".\assets\images")
-
-
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
@@ -58,7 +56,7 @@ class Login(tk.Tk):
         # self.button_back1 = ttk.Button(
         #     self.logFrame,
         #     image=self.img1,
-        #     bootstyle=SUCCESS,
+        #     bootstyle=INFO,
         #     # command=lambda: self.multipage.select(0),
         # )
         # self.button_back1.grid(row=0, column=0, padx=10, pady=(10,0), sticky="nw")
@@ -94,7 +92,7 @@ class Login(tk.Tk):
         self.button_login = ttk.Button(
             self.logFrame,
             text="Suivant",
-            bootstyle=SUCCESS,
+            bootstyle=INFO,
             command=self.verification
         )
         self.button_login.grid(row=3, column=0, pady=10, ipadx=30, ipady=5,padx=(0,10))
