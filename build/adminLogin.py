@@ -30,11 +30,6 @@ def open_webpage():
 user="admin"
 pwd="admin"
 
-def delayed_actions():
-    # Lance Dash.py
-    Popen(["python", "Dash.py"])
-    # Ouvre le navigateur
-    open_webpage()
     
 class Login(tk.Tk):
     def __init__(self):
@@ -106,7 +101,9 @@ class Login(tk.Tk):
             messagebox.showinfo("Succès", "Bienvenue !") 
             self.destroy()
             # Lance Dash.py en arrière-plan
-            Login.after(3000, delayed_actions)
+            Popen(["python", "Dash.py"])
+            # Ouvre le navigateur
+            open_webpage()
         else:messagebox.showerror("Erreur", "Email ou mot de passe incorrect.")
 
 
