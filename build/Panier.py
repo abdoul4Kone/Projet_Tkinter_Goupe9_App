@@ -3,11 +3,11 @@ import tkinter as tk
 from tkinter import messagebox
 import tkinter.messagebox
 import customtkinter 
-import ttkbootstrap as ttk
+# import ttkbootstrap as ttk
 import mysql.connector
 from pathlib import Path
 from PIL import Image
-from ttkbootstrap.tableview import Tableview
+# from ttkbootstrap.tableview import Tableview
 from session_manager import user_id
 import os
 from subprocess import call
@@ -79,9 +79,9 @@ class Panier(customtkinter.CTk):
         
         # configure window
         self.title("Commander")
-        self.geometry(f"{1100}x{580}")
-        
-        
+        self.geometry("1100x580")
+        # Désactiver le redimensionnement si nécessaire
+        self.resizable(False, False)
         
         self.setup_ui()
 
@@ -91,18 +91,18 @@ class Panier(customtkinter.CTk):
         # self.grid_rowconfigure((0, 1, 2), weight=1)
         
     def setup_ui(self):
-        
-        #Frame Principal
-        
-        # self.framePrincipal = customtkinter.CTkScrollableFrame(self,scrollbar_button_color="lightgrey")
-        # self.framePrincipal.pack(fill=BOTH, expand=YES, padx=10, pady=10)
-        
-        #En-tête
-
         self.grid_columnconfigure((0,1), weight=2)
-        self.grid_rowconfigure(1,weight=1)
-        self.grid_rowconfigure(0,weight=0)
-        self.entete = customtkinter.CTkFrame(self,fg_color="#fff", corner_radius=0,height=60)
+        self.grid_rowconfigure(1, weight=1)
+        self.grid_rowconfigure(0, weight=0)
+        
+        # Modifiez cette ligne
+        self.entete = customtkinter.CTkFrame(
+            self,
+            fg_color="#fff",
+            corner_radius=0,
+            height=60  # Retirez le int()
+        )
+        self.entete.grid(row=0, column=0, columnspan=2, padx=0, pady=0, sticky="nsew")
         self.entete.grid(row=0, column=0,columnspan=2, padx=0, pady=0,sticky="nsew")
         
         customtkinter.CTkButton(self.entete,width=100,text=" ",corner_radius=0,fg_color="transparent", hover=False, command=home,image= customtkinter.CTkImage(light_image=Image.open(relative_to_assets('logo.png')), size=(70, 50))).grid(row=0,column=0, sticky="nsw", padx=40)
