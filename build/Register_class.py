@@ -97,7 +97,7 @@ class Register(tk.Tk):
         self.button_next1 = ttk.Button(
             self.page1_container,
             text="Suivant",
-            bootstyle=SUCCESS,
+            bootstyle=INFO,
             command=self.valid1
         )
         self.button_next1.pack(pady=20,padx=10, ipadx=50, ipady=5)
@@ -105,7 +105,7 @@ class Register(tk.Tk):
 
     def setup_page2(self):
         # Chargement de l'image
-        image = Image.open(relative_to_assets("retour.png")")  # Remplacez par le chemin correct
+        image = Image.open(relative_to_assets("retour.png"))  # Remplacez par le chemin correct
         image = image.resize((20, 20))  # Redimensionner l'image
         self.img1 = ImageTk.PhotoImage(image)  # Garder une référence
 
@@ -113,7 +113,7 @@ class Register(tk.Tk):
         self.button_back1 = ttk.Button(
             self.page2,
             image=self.img1,
-            bootstyle=SUCCESS,
+            bootstyle=INFO,
             command=lambda: self.multipage.select(0),
         )
         self.button_back1.grid(row=0, column=0, padx=10, pady=(10,0), sticky="nw")
@@ -170,7 +170,7 @@ class Register(tk.Tk):
         self.button_next2 = ttk.Button(
             self.BoutFrame,
             text="Suivant",
-            bootstyle=SUCCESS,
+            bootstyle=INFO,
             command=self.valid2
         )
         self.button_next2.grid(row=0, column=0, pady=10, ipadx=50, ipady=5)
@@ -187,7 +187,7 @@ class Register(tk.Tk):
         self.button_back2 = ttk.Button(
             self.page3,
             image=self.img2,
-            bootstyle=SUCCESS,
+            bootstyle=INFO,
             command=lambda: self.multipage.select(1),
         )
         self.button_back2.grid(row=0, column=0, padx=10, pady=(10, 0), sticky="nw")
@@ -307,7 +307,7 @@ class Register(tk.Tk):
         self.button_submit = ttk.Button(
             self.page3_contener,
             text="Créer mon compte",
-            bootstyle=SUCCESS,
+            bootstyle=INFO,
             state="disabled",
             command=self.valid3
         )
@@ -417,12 +417,3 @@ if __name__ == "__main__":
     app = Register()
     app.mainloop()
     
-# class Confidential(tk.Tk):
-#     def __init__(self):
-#         super().__init__()
-#         self.geometry("50x100")
-#         self.title("Conditions de confidentialité")
-#         self.frame = ttk.Frame(self)
-#         self.frame.pack(expand=True)
-#         self.texte = ttk.Label(self.frame,text="Le Directeur de Cabinet Adjoint, représentant du Ministre, à lui à son tour souhaité une bienvenue aux participants. Il a signifié qu’il était important pour un Etat d’avoir les statistiques fiables sur les naissances, les décès, les mariages et les divorces. Pour ce faire, Monsieur le Directeur de Cabinet Adjoint a encouragé les acteurs à l’amélioration des enregistrements de données d’état civil car, le signifiait-il, le taux d’enregistrement des données d’état civil est faible. Pour clore ces propos, le représentant du Ministre a déclaré ouverte l’atelier de présentation de l’annuaire statistique d’état civil 2017 et de son rapport d’analyse.")
-#         self.texte.pack(padx=10, pady=10)
