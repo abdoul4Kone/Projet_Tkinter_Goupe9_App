@@ -17,6 +17,13 @@ ASSETS_PATH = OUTPUT_PATH / Path(r".\assets\images")
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
+    
+def Accueil():
+    if messagebox.askyesno("Quitter", "Voulez-vous vraiment retourner à l'accueil ?"):
+        app.destroy()
+        call(["python", "Accueil.py"])
+
+
 def connect_to_database():
     'Cette fonction permet de se connecter à la base de donnée'
     try:
@@ -48,30 +55,42 @@ class Login(tk.Tk):
         self.logFrame.pack(expand=True)
         
         # Chargement de l'image
+        image = Image.open(relative_to_assets("home.png"))  # Remplacez par le chemin correct
+        image = image.resize((20, 20))  # Redimensionner l'image
+        self.img = ImageTk.PhotoImage(image)  # Garder une référence
+
+        # Bouton "Retour" placé dans le coin supérieur gauche
+        self.button_home = ttk.Button(
+            self,
+            image=self.img,
+            bootstyle=INFO,
+            command=Accueil,
+        )
+        self.button_home.place(x=10, y=10, width=50, height=40)
+
+        # Conteneur principal centré
+        self.page_container= ttk.Frame(self.logFrame)
+        self.page_container.grid(row=1, column=0, padx=10, sticky="nsew")
+        # Conteneur principal pour centrer tout verticalement
+        self.logFrame.grid_rowconfigure(0, weight=1)
+        self.logFrame.grid_rowconfigure(1, weight=1)
+        self.logFrame.grid_columnconfigure(0, weight=1)
+        # Chargement de l'image
         image = Image.open(relative_to_assets("retour.png"))  # Remplacez par le chemin correct
         image = image.resize((20, 20))  # Redimensionner l'image
         self.img1 = ImageTk.PhotoImage(image)  # Garder une référence
 
-        # Bouton "Retour" placé dans le coin supérieur gauche
-        # self.button_back1 = ttk.Button(
-        #     self.logFrame,
-        #     image=self.img1,
-        #     bootstyle=INFO,
-        #     # command=lambda: self.multipage.select(0),
-        # )
-        # self.button_back1.grid(row=0, column=0, padx=10, pady=(10,0), sticky="nw")
+
         
-        # Titre
-        
-        self.titre = ttk.Label(self.logFrame,text="Content de vous revoir !",font=("Inter SemiBold", 13))
+        self.titre = ttk.Label(self.page_container,text="Content de vous revoir !",font=("Inter SemiBold", 13))
         self.titre.grid(row=0,column=0, sticky="nsew", pady=10, padx=(50,10))
         
-        self.stitre = ttk.Label(self.logFrame,text="Connectez-vous et effectuez vos achats en toute sérénité !",font=("Inter", 8))
+        self.stitre = ttk.Label(self.page_container,text="Connectez-vous et effectuez vos achats en toute sérénité !",font=("Inter", 8))
         self.stitre.grid(row=1,column=0, pady=(0,30), sticky="nsew")
         
         # Champs et entrée
         
-        self.secFrame = ttk.Frame(self.logFrame)
+        self.secFrame = ttk.Frame(self.page_container)
         self.secFrame.grid(row=2, column=0, padx=10, sticky="nsew")
         
         self.email = ttk.Label(self.secFrame, text="Email",font=("Inter SemiBold", 8))
@@ -90,7 +109,7 @@ class Login(tk.Tk):
         # Button
         
         self.button_login = ttk.Button(
-            self.logFrame,
+            self.page_container,
             text="Suivant",
             bootstyle=INFO,
             command=self.verification
@@ -99,7 +118,7 @@ class Login(tk.Tk):
         
         #Déjà inscrit?
         
-        self.inscription_frame = ttk.Frame(self.logFrame)
+        self.inscription_frame = ttk.Frame(self.page_container)
         self.inscription_frame.grid(row=4, column=0, columnspan=2, pady=(10))
         self.inscription_text = ttk.Label(
             self.inscription_frame,
