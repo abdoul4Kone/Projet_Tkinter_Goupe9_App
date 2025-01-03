@@ -826,10 +826,11 @@ class Commander(customtkinter.CTk):
 
                     # Commit des modifications
                     conn.commit()
+                    messagebox.showinfo("Réuissit", "Votre commande a été enrgistrée avec succès !")
+                    app.destroy()
+                    call(["python", "Accueil.py"])
             finally:
-                messagebox.showinfo("Réuissit", "Votre commande a été enrgistrée avec succès !")
-                app.destroy()
-                call(["python", "Accueil.py"])
+                print("ok")
                 
         else:
             messagebox.showwarning("Oups !", "Veuillez remplir tous les champs pour continuer")
