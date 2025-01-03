@@ -10,6 +10,7 @@ import pandas as pd
 from script import indicatifs,pays_indicatifs
 from subprocess import call
 from pathlib import Path
+import hashlib
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r".\assets\images")
@@ -19,9 +20,12 @@ def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
 
+
+    
 def Accueil():
-    app.destroy()
-    call(["python", "Accueil_01.py"])
+    if messagebox.askyesno("Quitter", "Voulez-vous vraiment retourner à l'accueil ?"):
+        app.destroy()
+        call(["python", "Accueil.py"])
 
 def connect_to_database():
     'Cette fonction permet de se connecter à la base de donnée'
@@ -72,11 +76,28 @@ class Register(tk.Tk):
     
 
     def setup_page1(self):
-        # Conteneur principal pour centrer tout verticalement
-        self.page1_container = ttk.Frame(self.page1)
-        self.page1_container.pack(expand=True)  
+        # Chargement de l'image
+        image = Image.open(relative_to_assets("home.png"))  # Remplacez par le chemin correct
+        image = image.resize((20, 20))  # Redimensionner l'image
+        self.img = ImageTk.PhotoImage(image)  # Garder une référence
 
-        
+        # Bouton "Retour" placé dans le coin supérieur gauche
+        self.button_home = ttk.Button(
+            self.page1,
+            image=self.img,
+            bootstyle=INFO,
+            command=Accueil,
+        )
+        self.button_home.grid(row=0, column=0, padx=10, pady=(10,0), sticky="nw", ipadx=5, ipady=5)
+
+        # Conteneur principal centré
+        self.page1_container= ttk.Frame(self.page1)
+        self.page1_container.grid(row=1, column=0, padx=10, sticky="nsew")
+        # Conteneur principal pour centrer tout verticalement
+        self.page1.grid_rowconfigure(0, weight=1)
+        self.page1.grid_rowconfigure(1, weight=1)
+        self.page1.grid_columnconfigure(0, weight=1)
+
 
         # Texte 1
         self.p1texte1 = ttk.Label(self.page1_container, text="Bienvenue", font=("Inter SemiBold", 16))
@@ -341,6 +362,13 @@ class Register(tk.Tk):
         if "@" not in mail or "." not in mail:
             messagebox.showerror("Erreur","Veuillez entrer une adresse électronique valide !")
             return False
+        
+        query = "SELECT id FROM Client WHERE email = %s "
+        cursor.execute(query, (mail,))
+        result = cursor.fetchone()
+        if result: 
+            messagebox.showwarning("Oups...", "Cette adresse électronique est déjà associée à un compte")
+            return False
         self.multipage.select(1)
         return True
         
@@ -385,6 +413,7 @@ class Register(tk.Tk):
         prenom =self.entry_prenom.get()
         email = self.entry_email.get()
         mdp = self.entry_password.get()
+        mdp = hashlib.sha256(mdp.encode()).hexdigest() #Cryptage du mdp
         tel = self.entry_indicatif.get() + " " + self.entry_tel.get() 
         birth_date = self.entry_birth.entry.get()
         sexe = self.selected_sexe.get()
@@ -399,9 +428,9 @@ class Register(tk.Tk):
                     cursor.execute(query, values)
                     conn.commit()
 
-                    messagebox.showinfo("Succès", "Compte créer avec succès !")
+                    messagebox.showinfo("Succès", "Compte créé avec succès !")
                     app.destroy()
-                    call(["python", "Accueil_01.py"])
+                    call(["python", "Login.py"])
                     
                 except mysql.connector.Error as err:
                     messagebox.showerror("Erreur d'insertion", f"Erreur : {err}")
