@@ -109,7 +109,7 @@ from session_manager import SessionManager
 from tkinter import messagebox
 def on_closing():
     session = SessionManager()
-    if messagebox.askokcancel("Quitter", "Voulez-vous vraiment quitter ?"):
+    if messagebox.askyesno("Quitter", "Voulez-vous vraiment quitter ?"):
         session.logout()  # Déconnexion de l'utilisateur
         window.destroy()
         
