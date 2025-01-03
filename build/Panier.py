@@ -257,12 +257,18 @@ class Panier(customtkinter.CTk):
                         produits[x][1] += 1  # Incrémentation de la quantité
                         quantity_label.configure(text=f"Quantité : {produits[x][1]}")  # Mise à jour du label
                         fillPanier(produits[x][-1], produits[x][1])  # Mise à jour du panier
+                        # Mettre à jour les variables d'affichage du panier
+                        self.nbProd.set(f"Total panier ({len(produits)})")
+                        self.coutTotVar.set(f"{self.prix_panier(produits)} FCFA")
 
                 def decrease_quantity(x):
                     if produits[x][1] > 1:  # Vérifie si la quantité est supérieure à 1
                         produits[x][1] -= 1  # Décrémentation de la quantité
                         quantity_label.configure(text=f"Quantité : {produits[x][1]}")  # Mise à jour du label
                         fillPanier(produits[x][-1], produits[x][1])  # Mise à jour du panier
+                        # Mettre à jour les variables d'affichage du panier
+                        self.nbProd.set(f"Total panier ({len(produits)})")
+                        self.coutTotVar.set(f"{self.prix_panier(produits)} FCFA")
 
                 def remove_product(x):
                     if messagebox.askyesno("Supprimer", "Supprimer cet article du panier ?") == True:
