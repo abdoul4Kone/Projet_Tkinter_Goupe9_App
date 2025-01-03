@@ -121,7 +121,7 @@ from session_manager import SessionManager
 from tkinter import messagebox
 def on_closing():
     session = SessionManager()
-    if messagebox.askokcancel("Quitter", "Voulez-vous vraiment quitter ?"):
+    if messagebox.askyesno("Quitter", "Voulez-vous vraiment quitter ?"):
         session.logout()  # Déconnexion de l'utilisateur
         window.destroy()
         
@@ -635,11 +635,15 @@ entry_1 = Entry(
     fg="#000716",
     highlightthickness=0
 )
-entry_1.place(
-    x=414.0,
-    y=70.0,
+
+
+canvas.create_window(
+    414.0,
+    70.0,
     width=374.0,
-    height=39.0
+    height=39.0,
+    window=entry_1,  # Widget
+    anchor="nw"  # Centrer le bouton sur les coordonnées
 )
 
 image_image_2 = PhotoImage(
