@@ -3,6 +3,7 @@ import mysql.connector
 from tkinter import messagebox
 import json
 import os
+import hashlib
 
 class User:
     def __init__(self, id=None, nom=None, prenoms=None, email=None,numero_tel=None):
@@ -78,9 +79,13 @@ class SessionManager:
         try:
             if not hasattr(self, 'db') or not self.db.is_connected():
                 self.connect_to_database()
+                
+            # Hachage du mot de passe saisi
+            hashed_password = hashlib.sha256(password.encode()).hexdigest()
+            
             
             query = "SELECT id, nom, prenoms, email , numero_tel FROM Client WHERE email = %s AND mdp = %s"
-            self.cursor.execute(query, (email, password))
+            self.cursor.execute(query, (email, hashed_password))
             result = self.cursor.fetchone()
             
             if result:
@@ -147,7 +152,3 @@ except FileNotFoundError:
     print(f"Le fichier {fichier_session} n'existe pas.")
 except json.JSONDecodeError as e:
     print(f"Erreur lors du chargement du fichier JSON : {e}")
-
-def hidePanier():
-    if user_id==None:
-        button_9.place_forget()
